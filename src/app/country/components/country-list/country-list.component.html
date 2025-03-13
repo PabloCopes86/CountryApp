@@ -1,0 +1,68 @@
+<section class="my-5 flex justify-center">
+  <table class="table table-md mt-2 w-full max-w-7xl">
+    <thead class="text-center">
+      <tr>
+        <th>#</th>
+        <th>Icono</th>
+        <th class="hidden sm:table-cell">Bandera</th>
+        <th>Nombre</th>
+        <th>Capital</th>
+        <th class="hidden sm:table-cell">Poblacion</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      @for (country of countries(); track country.cca2; let i = $index ) {
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ country.flag }}</td>
+        <td class="hidden sm:table-cell">
+
+            <img class="w-10 mx-auto" [src]="country.flagSvg" [alt]="country.name" />
+
+        </td>
+        <td>{{ country.name }}</td>
+        <td>{{ country.capitalList }}</td>
+        <td class="hidden sm:table-cell">
+          <span class="badge badge-outline badge-primary">{{
+            country.population | number
+          }}</span>
+        </td>
+
+        <td>
+          <a
+            [routerLink]="['/country/by', country.cca2]"
+            class="link-primary cursor-pointer hidden sm:block"
+          >
+            Más información
+          </a>
+          <a
+            [routerLink]="['/country/by', country.cca2]"
+            class="link-primary cursor-pointer sm:hidden"
+          >
+            Info
+          </a>
+        </td>
+      </tr>
+      } @if (errorMessage()) {
+      <tr>
+        <td colspan="8" class="text-center">
+          {{ errorMessage() }}
+        </td>
+      </tr>
+      }
+      <!--  -->
+      @if (countries().length === 0 && !isLoading()) {
+      <tr>
+        <td colspan="8" class="text-center">No se encontraron resultados</td>
+      </tr>
+      }
+      <!--  -->
+      @if (isLoading()) {
+      <tr>
+        <td colspan="8" class="text-center">Buscando países</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>

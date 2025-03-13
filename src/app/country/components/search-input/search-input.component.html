@@ -1,0 +1,31 @@
+<section class="flex flex-row gap-2 mt-2">
+  <div class="relative">
+    <input
+      type="text"
+      class="input input-bordered mr-2 w-56 pl-10"
+      [placeholder]="placeholder()"
+      autofocus
+      #txtSearch
+      (keyup.enter)="value.emit(txtSearch.value)"
+      (keyup)="inputValue.set(txtSearch.value)"
+      [value]="inputValue()"
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="absolute left-2 top-1/2 transform -translate-y-1/2 w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M21 21l-6-6M10 16a6 6 0 100-12 6 6 0 000 12z"
+      ></path>
+    </svg>
+  </div>
+  <button (click)="value.emit(txtSearch.value)" class="btn btn-primary">
+    Buscar
+  </button>
+</section>
